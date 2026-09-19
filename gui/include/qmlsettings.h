@@ -8,6 +8,8 @@ class QmlSettings : public QObject
     Q_PROPERTY(bool remotePlayAsk READ remotePlayAsk WRITE setRemotePlayAsk NOTIFY remotePlayAskChanged)
     Q_PROPERTY(bool addSteamShortcutAsk READ addSteamShortcutAsk WRITE setAddSteamShortcutAsk NOTIFY addSteamShortcutAskChanged)
     Q_PROPERTY(bool hideCursor READ hideCursor WRITE setHideCursor NOTIFY hideCursorChanged)
+    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
+    Q_PROPERTY(QVariantList availableLanguages READ availableLanguages NOTIFY languageChanged)
     Q_PROPERTY(int audioVideoDisabled READ audioVideoDisabled WRITE setAudioVideoDisabled NOTIFY audioVideoDisabledChanged)
     Q_PROPERTY(int resolutionLocalPS4 READ resolutionLocalPS4 WRITE setResolutionLocalPS4 NOTIFY resolutionLocalPS4Changed)
     Q_PROPERTY(int resolutionRemotePS4 READ resolutionRemotePS4 WRITE setResolutionRemotePS4 NOTIFY resolutionRemotePS4Changed)
@@ -252,6 +254,10 @@ public:
 
     bool hideCursor() const;
     void setHideCursor(bool enabled);
+
+    QString language() const;
+    void setLanguage(const QString &lang);
+    QVariantList availableLanguages() const;
 
     float hapticOverride() const;
     void setHapticOverride(float override);
@@ -638,6 +644,7 @@ signals:
     void remotePlayAskChanged();
     void addSteamShortcutAskChanged();
     void hideCursorChanged();
+    void languageChanged();
     void hapticOverrideChanged();
     void audioVideoDisabledChanged();
     void showStreamStatsChanged();

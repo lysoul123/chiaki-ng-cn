@@ -1,4 +1,5 @@
 #include "qmlsettings.h"
+#include <translator.h>
 #include "sessionlog.h"
 
 #include <QSet>
@@ -98,6 +99,25 @@ void QmlSettings::setHideCursor(bool enabled)
 {
     settings->SetHideCursor(enabled);
     emit hideCursorChanged();
+}
+
+QString QmlSettings::language() const
+{
+    return settings->GetLanguage();
+}
+
+void QmlSettings::setLanguage(const QString &lang)
+{
+    if(settings->GetLanguage() == lang)
+        return;
+    settings->SetLanguage(lang);
+    AppTranslator::instance().setLanguage(lang);
+    emit languageChanged();
+}
+
+QVariantList QmlSettings::availableLanguages() const
+{
+    return AppTranslator::availableLanguages();
 }
 
 bool QmlSettings::showStreamStats() const
@@ -1737,7 +1757,7 @@ QStringList QmlSettings::profiles() const
 {
     QStringList out = settings->GetProfiles();
     out.prepend("default");
-    out.append("create new profile");
+    out.append(tr("create new profile"));
     return out;
 }
 

@@ -52,6 +52,9 @@ set(SOURCE_FILES
 	src/qmlsettings.cpp
 	include/qmlsvgprovider.h
 	src/qmlsvgprovider.cpp
+	include/translator.h
+	src/translator.cpp
+	i18n/i18n.qrc
 	include/systemdinhibit.h
 	src/systemdinhibit.cpp
 	)

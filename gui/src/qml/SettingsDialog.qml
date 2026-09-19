@@ -566,6 +566,26 @@ DialogView {
 
                         Label {
                             Layout.alignment: Qt.AlignRight
+                            text: qsTr("Language:")
+                        }
+
+                        C.ComboBox {
+                            id: languageCombo
+                            Layout.preferredWidth: 400
+                            model: Chiaki.settings.availableLanguages
+                            textRole: "label"
+                            valueRole: "code"
+                            // 模型会随语言切换重建，需重新定位到当前语言（用命令式赋值，避免破坏绑定）
+                            function syncIndex() { currentIndex = indexOfValue(Chiaki.settings.language) }
+                            Component.onCompleted: syncIndex()
+                            onModelChanged: syncIndex()
+                            onActivated: index => {
+                                Chiaki.settings.language = valueAt(index)
+                            }
+                        }
+
+                        Label {
+                            Layout.alignment: Qt.AlignRight
                             text: qsTr("Log Directory:")
                         }
 
@@ -2216,7 +2236,7 @@ DialogView {
 
                         Button {
                             id: resetAllKeys
-                            text: "Reset All Keys"
+                            text: qsTr("Reset All Keys")
                             Layout.alignment: Qt.AlignRight
                             property bool firstInFocusChain: true
                             property bool lastInFocusChain: false
@@ -2550,7 +2570,7 @@ DialogView {
                             Layout.alignment: Qt.AlignHCenter
                             id: controllerMappingChange
                             firstInFocusChain: true
-                            text: "Change Controller Mapping"
+                            text: qsTr("Change Controller Mapping")
                             onClicked: controllerMappingDialog.show({
                                 reset: false
                             });
@@ -2558,7 +2578,7 @@ DialogView {
                         C.Button {
                             Layout.alignment: Qt.AlignHCenter
                             id: controllerMappingReset
-                            text: "Reset Controller Mapping"
+                            text: qsTr("Reset Controller Mapping")
                             onClicked: controllerMappingDialog.show({
                                 reset: true
                             });
@@ -3136,17 +3156,10 @@ DialogView {
                     Layout.preferredWidth: 400
                     verticalAlignment: Text.AlignTop
                     wrapMode: Text.Wrap
-                    text: "<h1>chiaki-ng</h1> by Street Pea, version %1
-                        <h2>Fork of Chiaki</h2> by Florian Markl at version 2.1.1
-
-                        <p>This program is free software: you can redistribute it and/or modify
-                        it under the terms of the GNU Affero General Public License version 3
-                        as published by the Free Software Foundation.</p>
-
-                        <p>This program is distributed in the hope that it will be useful,
-                        but WITHOUT ANY WARRANTY; without even the implied warranty of
-                        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-                        GNU General Public License for more details.</p>".arg(Qt.application.version)
+                    text: qsTr("<h1>chiaki-ng</h1> by Street Pea, version %1").arg(Qt.application.version)
+                          + "\n" + qsTr("<h2>Fork of Chiaki</h2> by Florian Markl at version 2.1.1")
+                          + "\n\n" + qsTr("<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License version 3 as published by the Free Software Foundation.</p>")
+                          + "\n\n" + qsTr("<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>")
                 }
             }
         }

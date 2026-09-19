@@ -849,6 +849,16 @@ QString Settings::GetAudioOutDevice() const
 	return settings.value("settings/audio_out_device").toString();
 }
 
+QString Settings::GetLanguage() const
+{
+	return settings.value("settings/language").toString();
+}
+
+void Settings::SetLanguage(const QString &lang)
+{
+	settings.setValue("settings/language", lang);
+}
+
 QString Settings::GetAudioInDevice() const
 {
 	return settings.value("settings/audio_in_device").toString();

@@ -103,7 +103,7 @@ for dll_dir in "$msys_prefix/bin" "/clangarm64/bin" "$msys_prefix/mingw64/bin"; 
 done
 shopt -u nullglob
 
-windeployqt6.exe --no-translations --qmldir="$qml_dir" "$output_dir/$(basename "$exe_path")"
+windeployqt6.exe --qmldir="$qml_dir" "$output_dir/$(basename "$exe_path")"
 
 # Remove system-provided DLLs that Windows already supplies and
 # should not be bundled with the MSYS2 build (e.g. D3D compiler). Use

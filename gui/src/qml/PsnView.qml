@@ -87,7 +87,7 @@ Rectangle {
             visible: opacity
             text: {
                 var typeString = registOnly ? qsTr("automatic registration") : qsTr("remote connection via PSN")
-                qsTr("Press %1 to cancel %2").arg(Chiaki.controllers.length ? (root.controllerButton("circle").includes("deck") ? "B" : "Circle") : "escape or right-click").arg(typeString)
+                qsTr("Press %1 to cancel %2").arg(Chiaki.controllers.length ? (root.controllerButton("circle").includes("deck") ? "B" : qsTr("Circle")) : qsTr("escape or right-click")).arg(typeString)
             }
         }
 

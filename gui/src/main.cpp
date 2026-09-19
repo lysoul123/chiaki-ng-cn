@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) { return real_main(argc, argv); }
 #include <controllermanager.h>
 #include <discoverymanager.h>
 #include <qmlmainwindow.h>
+#include <translator.h>
 #include <QApplication>
 #include <QtTypes>
 
@@ -178,6 +179,9 @@ int real_main(int argc, char *argv[])
 	QStringList args = parser.positionalArguments();
 
 	Settings settings(parser.isSet(profile_option) ? parser.value(profile_option) : QString());
+
+	// 按设置中保存的语言装载翻译（空值 = 跟随系统语言）
+	AppTranslator::instance().setLanguage(settings.GetLanguage());
 	bool exit_app_on_stream_exit = parser.isSet(stream_exit_option);
 	if(parser.isSet(profile_option))
 		settings.SetCurrentProfile(parser.value(profile_option));

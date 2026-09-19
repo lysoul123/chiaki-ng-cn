@@ -63,24 +63,24 @@ DialogView {
 
             Label {
                 text: qsTr("New Profile Name")
-                visible: profileComboBox.currentIndex == profileComboBox.model.indexOf("create new profile")
+                visible: profileComboBox.currentIndex == profileComboBox.model.indexOf(qsTr("create new profile"))
             }
 
             C.TextField {
                 id: profileName
-                visible: profileComboBox.currentIndex == profileComboBox.model.indexOf("create new profile")
+                visible: profileComboBox.currentIndex == profileComboBox.model.indexOf(qsTr("create new profile"))
                 Layout.preferredWidth: 400
                 lastInFocusChain: true
             }
 
             Label {
                 text: qsTr("Delete selected profile")
-                visible: profileComboBox.model[profileComboBox.currentIndex] != "default" && profileComboBox.model[profileComboBox.currentIndex] != "create new profile" && profileComboBox.model[profileComboBox.currentIndex] != Chiaki.settings.currentProfile
+                visible: profileComboBox.model[profileComboBox.currentIndex] != "default" && profileComboBox.model[profileComboBox.currentIndex] != qsTr("create new profile") && profileComboBox.model[profileComboBox.currentIndex] != Chiaki.settings.currentProfile
             }
 
             C.CheckBox {
                 id: deleteBox
-                visible: profileComboBox.model[profileComboBox.currentIndex] != "default" && profileComboBox.model[profileComboBox.currentIndex] != "create new profile" && profileComboBox.model[profileComboBox.currentIndex] != Chiaki.settings.currentProfile
+                visible: profileComboBox.model[profileComboBox.currentIndex] != "default" && profileComboBox.model[profileComboBox.currentIndex] != qsTr("create new profile") && profileComboBox.model[profileComboBox.currentIndex] != Chiaki.settings.currentProfile
                 lastInFocusChain: true
             }
         }

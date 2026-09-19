@@ -43,6 +43,7 @@ extern "C" {
 #include <QVulkanInstance>
 #include <QQuickItem>
 #include <QQmlEngine>
+#include <translator.h>
 #include <QQmlComponent>
 #include <QQuickRenderTarget>
 #include <QQuickRenderControl>
@@ -5074,6 +5075,9 @@ renderer_backend_ready:
     deferred_swap_thread->start(QThread::HighPriority);
 
     qml_engine = new QQmlEngine(this);
+    // 语言切换后让所有 qsTr() 绑定重新求值
+    connect(&AppTranslator::instance(), &AppTranslator::languageChanged,
+            qml_engine, &QQmlEngine::retranslate);
     qml_engine->addImageProvider(QStringLiteral("svg"), new QmlSvgProvider);
     if (!qml_engine->incubationController())
         qml_engine->setIncubationController(quick_window->incubationController());

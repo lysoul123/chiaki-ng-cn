@@ -359,6 +359,9 @@ class Settings : public QObject
 
 		QString GetHardwareDecoder() const;
 		void SetHardwareDecoder(const QString &hw_decoder);
+
+		QString GetLanguage() const;
+		void SetLanguage(const QString &lang);
 		bool GetUseZeroCopy() const { return settings.value("settings/use_zero_copy", true).toBool(); }
 		void SetUseZeroCopy(bool enabled) { settings.setValue("settings/use_zero_copy", enabled); }
 		bool GetVulkanDeferredSwap() const { return settings.value("settings/vulkan_deferred_swap", false).toBool(); }
